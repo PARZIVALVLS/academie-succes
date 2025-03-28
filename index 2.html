@@ -1,0 +1,108 @@
+
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Académie Succès - Connexion</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background: linear-gradient(to bottom right, #000000, #1e1e1e);
+      color: white;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      min-height: 100vh;
+    }
+    .container {
+      text-align: center;
+      max-width: 400px;
+      padding: 20px;
+    }
+    input, button {
+      padding: 10px;
+      width: 100%;
+      margin: 10px 0;
+      font-size: 16px;
+    }
+    .dashboard {
+      display: none;
+      margin-top: 30px;
+    }
+    .module {
+      background: #2c2c2c;
+      padding: 15px;
+      margin: 10px 0;
+      border-radius: 8px;
+    }
+    .hidden { display: none; }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>Académie Succès</h1>
+    <p>Entre ton code d'accès</p>
+    <input type="text" id="codeInput" placeholder="Code d'accès (ex: SUCCES-CLIENT-1)" />
+    <button onclick="validateCode()">Valider</button>
+
+    <div class="dashboard hidden" id="dashboard">
+      <h2>Bienvenue !</h2>
+      <p>Progression : <span id="progress">0%</span></p>
+
+      <div class="module" id="module1">
+        <h3>Module 1 : Créer sa boutique</h3>
+        <p>Apprenez à créer une boutique Shopify de A à Z.</p>
+        <button onclick="unlock(1)">J’ai terminé</button>
+      </div>
+
+      <div class="module hidden" id="module2">
+        <h3>Module 2 : Trouver son produit</h3>
+        <p>Les meilleures techniques pour trouver un produit gagnant.</p>
+        <button onclick="unlock(2)">J’ai terminé</button>
+      </div>
+
+      <div class="module hidden" id="module3">
+        <h3>Module 3 : Lancer ses pubs</h3>
+        <p>Introduction aux TikTok Ads & Facebook Ads.</p>
+        <button onclick="finish()">Terminer la formation</button>
+      </div>
+
+      <div class="hidden" id="doneMessage">
+        <h3>Félicitations !</h3>
+        <p>Tu as terminé la formation basique.</p>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    const validCodes = ["SUCCES-CLIENT-1"];
+
+    function validateCode() {
+      const input = document.getElementById("codeInput").value.toUpperCase().trim();
+      if (validCodes.includes(input)) {
+        document.getElementById("dashboard").classList.remove("hidden");
+      } else {
+        alert("Code invalide.");
+      }
+    }
+
+    function unlock(index) {
+      if (index === 1) {
+        document.getElementById("module2").classList.remove("hidden");
+        document.getElementById("progress").innerText = "33%";
+      } else if (index === 2) {
+        document.getElementById("module3").classList.remove("hidden");
+        document.getElementById("progress").innerText = "66%";
+      }
+    }
+
+    function finish() {
+      document.getElementById("doneMessage").classList.remove("hidden");
+      document.getElementById("progress").innerText = "100%";
+    }
+  </script>
+</body>
+</html>
