@@ -1,0 +1,184 @@
+
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Académie Succès - Formation</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Arial', sans-serif;
+      background-color: #000;
+      color: #fff;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      min-height: 100vh;
+      padding: 20px;
+    }
+    .container {
+      display: flex;
+      max-width: 1200px;
+      width: 100%;
+      text-align: center;
+    }
+    .sidebar {
+      width: 250px;
+      background-color: #111;
+      padding: 20px;
+      border-radius: 8px;
+      margin-right: 20px;
+    }
+    .sidebar h2 {
+      font-size: 1.8em;
+    }
+    .sidebar button {
+      width: 100%;
+      padding: 12px;
+      margin: 10px 0;
+      background-color: #222;
+      color: #fff;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      font-size: 16px;
+      transition: background-color 0.3s ease;
+    }
+    .sidebar button:hover {
+      background-color: #333;
+    }
+    .content {
+      flex: 1;
+      background-color: #1d1d1d;
+      border-radius: 8px;
+      padding: 20px;
+      max-height: 500px;
+      overflow-y: scroll;
+    }
+    .content h3 {
+      font-size: 1.5em;
+    }
+    .content p {
+      font-size: 1em;
+      line-height: 1.6;
+    }
+    .progress-bar-container {
+      width: 100%;
+      height: 30px;
+      background-color: #333;
+      border-radius: 15px;
+      margin-top: 20px;
+    }
+    .progress-bar {
+      height: 100%;
+      background-color: #4caf50;
+      width: 0%;
+      border-radius: 15px;
+      transition: width 0.5s ease;
+    }
+    .hidden { display: none; }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="sidebar">
+      <h2>Modules</h2>
+      <button onclick="showContent(1)">Module 1 : Créer sa boutique</button>
+      <button onclick="showContent(2)">Module 2 : Trouver son produit</button>
+      <button onclick="showContent(3)">Module 3 : Lancer ses pubs</button>
+    </div>
+    <div class="content" id="moduleContent">
+      <h3>Bienvenue à Académie Succès</h3>
+      <p>Choisissez un module à gauche pour commencer votre formation.</p>
+    </div>
+  </div>
+
+  <div class="progress-bar-container">
+    <div id="progressBar" class="progress-bar"></div>
+  </div>
+
+  <script>
+    let progress = 0;
+
+    // Fonction pour afficher le contenu du module
+    function showContent(moduleNumber) {
+      let content = '';
+      if (moduleNumber === 1) {
+        content = `
+          <h3>Module 1 : Créer sa boutique</h3>
+          <p>Dans ce module, vous apprendrez comment créer votre propre boutique Shopify.</p>
+          <p>Étapes :</p>
+          <ol>
+            <li>Création d'un compte Shopify</li>
+            <li>Choisir un thème pour votre boutique</li>
+            <li>Personnalisation du thème et ajout des produits</li>
+          </ol>
+          <p>Vidéo explicative ici (ajouter lien vidéo)</p>
+          <button onclick="unlockModule(1)">J'ai terminé ce module</button>
+        `;
+      } else if (moduleNumber === 2) {
+        content = `
+          <h3>Module 2 : Trouver son produit</h3>
+          <p>Dans ce module, vous apprendrez à identifier les produits à succès à vendre dans votre boutique.</p>
+          <p>Conseils pour trouver un produit gagnant :</p>
+          <ul>
+            <li>Analyse de la demande du marché</li>
+            <li>Utilisation de plateformes comme AliExpress ou Oberlo</li>
+            <li>Analyser les produits tendances</li>
+          </ul>
+          <p>Vidéo de démonstration à venir...</p>
+          <button onclick="unlockModule(2)">J'ai terminé ce module</button>
+        `;
+      } else if (moduleNumber === 3) {
+        content = `
+          <h3>Module 3 : Lancer ses publicités</h3>
+          <p>Ce module vous apprend à configurer et gérer vos publicités sur Facebook et TikTok pour générer des ventes.</p>
+          <p>Les étapes à suivre :</p>
+          <ol>
+            <li>Créer un compte publicitaire Facebook</li>
+            <li>Définir vos objectifs publicitaires</li>
+            <li>Cibler votre audience et choisir votre budget</li>
+          </ol>
+          <p>Vidéo sur la création de campagnes publicitaires...</p>
+          <button onclick="finishCourse()">Terminer la formation</button>
+        `;
+      }
+
+      document.getElementById('moduleContent').innerHTML = content;
+    }
+
+    // Fonction pour débloquer un module et mettre à jour la barre de progression
+    function unlockModule(moduleNumber) {
+      if (moduleNumber === 1) {
+        progress = 33.33;
+        document.getElementById('progressBar').style.width = progress + '%';
+        alert('Module 1 terminé');
+      } else if (moduleNumber === 2) {
+        progress = 66.66;
+        document.getElementById('progressBar').style.width = progress + '%';
+        alert('Module 2 terminé');
+      } else if (moduleNumber === 3) {
+        progress = 100;
+        document.getElementById('progressBar').style.width = progress + '%';
+        alert('Module 3 terminé');
+      }
+    }
+
+    // Fonction pour terminer la formation et afficher un message
+    function finishCourse() {
+      document.getElementById('moduleContent').innerHTML = `
+        <h3>Félicitations !</h3>
+        <p>Tu as terminé la formation basique.</p>
+        <button onclick="generateCertificate()">Télécharger le certificat</button>
+      `;
+    }
+
+    // Fonction pour générer un certificat
+    function generateCertificate() {
+      alert("Certificat généré ! (fonctionnalité à implémenter)");
+    }
+  </script>
+</body>
+</html>
